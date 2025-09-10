@@ -1,0 +1,33 @@
+.first-image {
+  background-image: url("https://images.surferseo.art/13d88d56-b0a0-4776-bec7-0ecb3da72b63.webp");
+}
+
+.second-image {
+  background-image: url("https://wallpapers.com/images/hd/giyu-tomioka-side-profile-kc6ur8jhozxsnaf9.jpg");
+}
+
+.first-image,
+.second-image {
+  color: black;
+  text-align: center;
+  font-size: 24px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.content {
+  width: 100%;
+  height: 40vh;
+  text-align: center;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
