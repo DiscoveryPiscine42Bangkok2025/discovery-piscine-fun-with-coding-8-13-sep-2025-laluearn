@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 200px;
+}
+.box-1,
+.box-2 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  padding-left: 10px;
+}
+.box-1 {
+  background-color: lavender;
+}
+.box-2 {
+  background-color: pink;
+}
+@media screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+}
