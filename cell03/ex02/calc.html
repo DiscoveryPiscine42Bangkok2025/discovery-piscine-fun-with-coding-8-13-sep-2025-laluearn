@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+        label {
+            color: #252525;
+            font-size: 1.2rem;
+        }
+        input {
+            border: solid 1px grey;
+            border-radius: 24px;
+            padding: 10px 20px;
+        }
+        select {
+            border: solid 1px grey;
+            border-radius: 24px;
+            padding: 10px;
+        }
+        #btn {
+            border: solid 1px #FFE6EA;
+            border-radius: 24px;
+            padding: 10px 20px;
+            background-color: #FFE6EA;
+            color: grey;
+        }
+        #btn:hover {
+            background-color: pink;
+            color: #252525;
+            cursor: pointer;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form action="#" id="calc-form">
+        <!-- left -->
+        <label for="label-a" id="value-a">Value A</label>
+        <input type="text" id="input-a" onchange="checkNum(this)"/>
+        <!-- operators -->
+        <select name="operation" id="operation">
+          <option value="plus">+</option>
+          <option value="minus">-</option>
+          <option value="multiply">*</option>
+          <option value="divide">/</option>
+          <option value="modulo">%</option>
+        </select>
+        <!-- right -->
+        <label for="label-b" id="value-b" >Value B</label>
+        <input type="text" id="input-b" onchange="checkNum(this)"/>
+        <!-- Try me button -->
+        <input type="submit" id="btn" value="Try me!" />
+      </form>
+    </div>
+  </body>
+  <script>
+    const interval = setInterval(() => {
+      alert("Please, use me...");
+    }, 30000);
+
+    function checkNum(num) {
+      if (num.value < 0) {
+        alert("Error :(");
+        console.log("Error :(");
+      }
+    }
+
+    const calcForm = document.getElementById("calc-form");
+    calcForm.addEventListener("submit", (e) => {
+        const valueA = document.getElementById("input-a").value;
+        const valueB = document.getElementById("input-b").value;
+        const operation = document.getElementById("operation").value;
+        calculate(valueA, valueB, operation);
+        e.preventDefault()
+    })
+    
+    function calculate(valueA, valueB, operation) {
+        let result;
+
+        switch(operation) {
+            case "plus":
+                result = parseInt(valueA) + parseInt(valueB);
+                break
+            case "minus":
+                result = parseInt(valueA) - parseInt(valueB);
+                break
+            case "multiply":
+                result = parseInt(valueA) * parseInt(valueB);
+                break
+            case "divide":
+                if(valueB == "0") {
+                    alert("It's over 9000");
+                    console.log("It's over 9000");
+                    return;
+                }
+                result = parseInt(valueA) / parseInt(valueB);
+                break
+            case "modulo":
+                if(valueB == "0") {
+                    alert("It's over 9000");
+                    console.log("It's over 9000");
+                    return;
+                }
+                result = parseInt(valueA) % parseInt(valueB);
+        }
+        alert(result);
+        console.log(result);
+    }
+  </script>
+</html>
