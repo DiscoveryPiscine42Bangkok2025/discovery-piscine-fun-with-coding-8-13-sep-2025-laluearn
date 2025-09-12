@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kieattiyos Poomdeeying (Ink) - Portfolio</title>
+	<link rel="stylesheet" href="style1.css">
+</head>
+<body>
+	<nav>
+		<ul>
+            <li><a href="#" id="home-logo">Home</a></li>
+			<li><a href="#about" id="about-logo">About</a></li>
+			<li><a href="#contact" id="contact-logo">Contact</a></li>
+		</ul>
+	</nav>
+
+	<section id="profile" class="section profile">
+		<div class="profile-content">
+				<img src="myPicture.jpg" class="picture" id="profile-gun-img" />
+				<div class="name" id="name-bang"></div>
+		</div>
+	</section>
+
+	<section id="about" class="section about">
+		<div class="about-content">
+			<div class="about-desc">
+				<h2>About Me</h2>
+				<p>สวัสดีครับ ผมชื่อเกียรติยศ พุ่มดียิ่ง เป็นนักศึกษาวิศวกรรมคอมพิวเตอร์ที่ KMITL<br>
+				สนใจด้าน Web, Coding, และเทคโนโลยีใหม่ ๆ<br>
+				งานอดิเรก: เล่นเกม, ถ่ายรูป, และออกกำลังกาย<br>
+				<br>
+				<b>"พร้อมลุยกับทุกความท้าทาย!"</b>
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="contact" class="section contact">
+		<div class="contact-content">
+			<h2>Contact</h2>
+			<ul>
+				<li><b>Email:</b> 66010085@kmitl.ac.th</li>
+				<li><b>Phone:</b> 0656975425</li>
+				<li><b>Instagram:</b> <a href="https://instagram.com/inkbasicc" target="_blank">inkbasicc</a></li>
+			</ul>
+		</div>
+	</section>
+<script>
+const NAME = "Kieattiyos Poomdeeying";
+const CHAR_INTERVAL = 50; // ช่วงเวลาแสดงตัวอักษร
+const SHOW_DELAY = 1500; // เวลาค้างชื่อ
+const FADE_DURATION = 800; // เวลา fade out
+const MOVE_DURATION = 3000; // เวลาเลื่อนไปขวา
+
+function createNameElements() {
+	const nameBang = document.getElementById('name-bang');
+	nameBang.innerHTML = '';
+	
+	const chars = NAME.split("");
+	chars.forEach(char => {
+		const span = document.createElement('span');
+		span.textContent = char;
+		span.style.opacity = '0';
+		span.style.display = 'inline-block';
+		span.style.transition = 'opacity 0.3s ease';
+		nameBang.appendChild(span);
+	});
+	
+	return Array.from(nameBang.children);
+}
+
+function showCharacters(spans) {
+	spans.forEach((span, idx) => {
+		setTimeout(() => {
+			span.style.opacity = '1';
+		}, idx * CHAR_INTERVAL);
+	});
+}
+
+function moveNameRight() {
+	const nameBang = document.getElementById('name-bang');
+	nameBang.style.transition = `transform ${MOVE_DURATION}ms linear`;
+	nameBang.style.transform = 'translateX(100vw)';
+}
+
+function fadeOutCharacters(spans) {
+	spans.forEach(span => {
+		span.style.transition = `opacity ${FADE_DURATION}ms ease`;
+		span.style.opacity = '0';
+	});
+}
+
+function resetPosition() {
+	const nameBang = document.getElementById('name-bang');
+	nameBang.style.transition = 'none';
+	nameBang.style.transform = 'translateX(0)';
+	// ให้เวลาสำหรับ reset
+	setTimeout(() => {
+		nameBang.style.transition = '';
+	}, 50);
+}
+
+function animateNameSequence() {
+	const nameBang = document.getElementById('name-bang');
+	const spans = createNameElements();
+	
+	showCharacters(spans);
+	
+	const totalCharTime = spans.length * CHAR_INTERVAL;
+	setTimeout(() => {
+		nameBang.style.transition = `transform ${SHOW_DELAY}ms linear`;
+		nameBang.style.transform = 'translateX(200px)';
+	}, 100);
+
+	setTimeout(() => {
+		fadeOutCharacters(spans);
+	}, totalCharTime + SHOW_DELAY);
+
+	setTimeout(() => {
+		resetPosition();
+		triggerGunAnimation();
+		animateNameSequence();
+	}, totalCharTime + SHOW_DELAY + FADE_DURATION + 500);
+}
+
+function triggerGunAnimation() {
+	const gunImg = document.getElementById('profile-gun-img');
+	if (gunImg) {
+		gunImg.classList.add('gun-recoil-animate');
+		setTimeout(() => {
+			gunImg.classList.remove('gun-recoil-animate');
+		}, 1200);
+	}
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+	// เริ่ม animation
+	triggerGunAnimation();
+	animateNameSequence();
+
+	// Navigation smooth scroll
+	document.getElementById('home-logo').addEventListener('click', function(e) {
+		e.preventDefault();
+		document.body.scrollIntoView({ behavior: 'smooth' });
+	});
+	
+	document.getElementById('about-logo').addEventListener('click', function(e) {
+		e.preventDefault();
+		const aboutSection = document.getElementById('about');
+		if (aboutSection) {
+			aboutSection.scrollIntoView({ behavior: 'smooth' });
+		}
+	});
+	
+	document.getElementById('contact-logo').addEventListener('click', function(e) {
+		e.preventDefault();
+		const contactSection = document.getElementById('contact');
+		if (contactSection) {
+			contactSection.scrollIntoView({ behavior: 'smooth' });
+		}
+	});
+});
+</script>
+</body>
+</html>
